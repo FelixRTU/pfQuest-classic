@@ -7,7 +7,7 @@ All rights to:
 
 ---
 
-If you want to install the addon just download the zip, extract it and move it into your interface folder.
+If you want to install the addon just download the zip, extract it and rename the folder to "pfQuest-classic". move it into your interface folder.
 
 ---
 
