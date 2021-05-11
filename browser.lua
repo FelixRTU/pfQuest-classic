@@ -396,7 +396,7 @@ local function ResultButtonReload(self)
 end
 
 local function ResultButtonCreate(i, resultType)
-  local f = CreateFrame("Button", nil, pfBrowser.tabs[resultType].list)
+  local f = CreateFrame("Button", nil, pfBrowser.tabs[resultType].list,  BackdropTemplateMixin and BackdropTemplateMixin and "BackdropTemplate")
   f:SetPoint("TOPLEFT", pfBrowser.tabs[resultType].list, "TOPLEFT", 10, -i*30 + 5)
   f:SetPoint("BOTTOMRIGHT", pfBrowser.tabs[resultType].list, "TOPRIGHT", 10, -i*30 - 15)
   f:Hide()
@@ -418,7 +418,7 @@ local function ResultButtonCreate(i, resultType)
   f.idText:SetPoint("LEFT", f, "LEFT", 30, 0)
 
   -- favourite button
-  f.fav = CreateFrame("Button", nil, f)
+  f.fav = CreateFrame("Button", nil, f,  BackdropTemplateMixin and BackdropTemplateMixin and "BackdropTemplate")
   f.fav:SetHitRectInsets(-3,-3,-3,-3)
   f.fav:SetPoint("LEFT", 0, 0)
   f.fav:SetWidth(16)
@@ -450,7 +450,7 @@ local function ResultButtonCreate(i, resultType)
     }
 
     for button, settings in pairs(buttons) do
-      f[button] = CreateFrame("Button", nil, f)
+      f[button] = CreateFrame("Button", nil, f,  BackdropTemplateMixin and BackdropTemplateMixin and "BackdropTemplate")
       f[button]:SetHitRectInsets(-3,-3,-3,-3)
       f[button]:SetPoint("RIGHT", settings.offset, 0)
       f[button]:SetWidth(16)
@@ -538,13 +538,13 @@ local function CreateBrowseWindow(fname, name, parent, anchor, x, y)
   parent.tabs[fname]:Hide()
   parent.tabs[fname].buttons = { }
 
-  parent.tabs[fname].backdrop = CreateFrame("Frame", name .. "Backdrop", parent.tabs[fname])
+  parent.tabs[fname].backdrop = CreateFrame("Frame", name .. "Backdrop", parent.tabs[fname],  BackdropTemplateMixin and BackdropTemplateMixin and "BackdropTemplate")
   parent.tabs[fname].backdrop:SetFrameLevel(1)
   parent.tabs[fname].backdrop:SetPoint("TOPLEFT", parent.tabs[fname], "TOPLEFT", -5, 5)
   parent.tabs[fname].backdrop:SetPoint("BOTTOMRIGHT", parent.tabs[fname], "BOTTOMRIGHT", 5, -5)
   pfUI.api.CreateBackdrop(parent.tabs[fname].backdrop, nil, true)
 
-  parent.tabs[fname].button = CreateFrame("Button", name .. "Button", parent)
+  parent.tabs[fname].button = CreateFrame("Button", name .. "Button", parent,  BackdropTemplateMixin and BackdropTemplateMixin and "BackdropTemplate")
   parent.tabs[fname].button:SetPoint(anchor, x, y)
   parent.tabs[fname].button:SetWidth(153)
   parent.tabs[fname].button:SetHeight(30)
@@ -596,7 +596,7 @@ end
 -- ## moved to minimapbutton.lua 
 
 -- browser window
-pfBrowser = CreateFrame("Frame", "pfQuestBrowser", UIParent)
+pfBrowser = CreateFrame("Frame", "pfQuestBrowser", UIParent,  BackdropTemplateMixin and BackdropTemplateMixin and "BackdropTemplate")
 pfBrowser:Hide()
 pfBrowser:SetWidth(640)
 pfBrowser:SetHeight(480)
@@ -673,7 +673,7 @@ pfBrowser.title:SetJustifyH("LEFT")
 pfBrowser.title:SetFont(pfUI.font_default, 14)
 pfBrowser.title:SetText("|cff33ffccpf|rQuest")
 
-pfBrowser.close = CreateFrame("Button", "pfQuestBrowserClose", pfBrowser)
+pfBrowser.close = CreateFrame("Button", "pfQuestBrowserClose", pfBrowser,  BackdropTemplateMixin and BackdropTemplateMixin and "BackdropTemplate")
 pfBrowser.close:SetPoint("TOPRIGHT", -5, -5)
 pfBrowser.close:SetHeight(20)
 pfBrowser.close:SetWidth(20)
@@ -692,7 +692,7 @@ EnableTooltips(pfBrowser.close, {
 })
 pfUI.api.SkinButton(pfBrowser.close, 1, .5, .5)
 
-pfBrowser.journal = CreateFrame("Button", "pfQuestJournalOpen", pfBrowser)
+pfBrowser.journal = CreateFrame("Button", "pfQuestJournalOpen", pfBrowser,  BackdropTemplateMixin and BackdropTemplateMixin and "BackdropTemplate")
 pfBrowser.journal:SetPoint("TOPRIGHT", -30, -5)
 pfBrowser.journal:SetHeight(20)
 pfBrowser.journal:SetWidth(20)
@@ -710,7 +710,7 @@ EnableTooltips(pfBrowser.journal, {
 })
 pfUI.api.SkinButton(pfBrowser.journal)
 
-pfBrowser.clean = CreateFrame("Button", "pfQuestBrowserClean", pfBrowser)
+pfBrowser.clean = CreateFrame("Button", "pfQuestBrowserClean", pfBrowser,  BackdropTemplateMixin and BackdropTemplateMixin and "BackdropTemplate")
 pfBrowser.clean:SetPoint("TOPRIGHT", pfBrowser, "TOPRIGHT", -5, -30)
 pfBrowser.clean:SetPoint("BOTTOMRIGHT", pfBrowser, "TOPRIGHT", 0, -55)
 pfBrowser.clean:SetScript("OnClick", function()
@@ -736,7 +736,7 @@ CreateBrowseWindow("quests", "pfQuestBrowserQuests", pfBrowser, "BOTTOMRIGHT", -
 
 SelectView(pfBrowser.tabs["units"])
 
-pfBrowser.input = CreateFrame("EditBox", "pfQuestBrowserSearch", pfBrowser)
+pfBrowser.input = CreateFrame("EditBox", "pfQuestBrowserSearch", pfBrowser,  BackdropTemplateMixin and BackdropTemplateMixin and "BackdropTemplate")
 pfBrowser.input:SetFont(pfUI.font_default, pfUI_config.global.font_size, "OUTLINE")
 pfBrowser.input:SetFontObject("GameFontDisable")
 pfBrowser.input:SetAutoFocus(false)
@@ -753,7 +753,7 @@ pfBrowser.input.searchIcon:SetWidth(14)
 pfBrowser.input.searchIcon:SetVertexColor(0.6, 0.6, 0.6)
 pfBrowser.input.searchIcon:SetPoint("LEFT", pfBrowser.input, "LEFT", 6, 0)
 
-pfBrowser.input.clearButton = CreateFrame("Button", "$parentClearButton", pfBrowser.input)
+pfBrowser.input.clearButton = CreateFrame("Button", "$parentClearButton", pfBrowser.input,  BackdropTemplateMixin and BackdropTemplateMixin and "BackdropTemplate")
 pfBrowser.input.clearButton:Hide()
 pfBrowser.input.clearButton:SetHeight(17)
 pfBrowser.input.clearButton:SetWidth(17)

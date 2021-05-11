@@ -15,7 +15,7 @@ function pfQuest:Debug(msg)
   end
 
   if not pfQuest.debugwin then
-    pfQuest.debugwin = CreateFrame("ScrollingMessageFrame", nil, UIParent)
+    pfQuest.debugwin = CreateFrame("ScrollingMessageFrame", nil, UIParent,  BackdropTemplateMixin and "BackdropTemplate")
     pfQuest.debugwin:SetWidth(320)
     pfQuest.debugwin:SetHeight(320)
     pfQuest.debugwin:SetPoint("RIGHT", -42, 0)
@@ -293,7 +293,7 @@ function pfQuest:AddQuestLogIntegration()
   dockTitle:SetHeight(dockTitle:GetHeight() + 30)
   dockTitle:SetJustifyV("BOTTOM")
 
-  pfQuest.buttonOnline = pfQuest.buttonOnline or CreateFrame("Button", "pfQuestOnline", dockFrame)
+  pfQuest.buttonOnline = pfQuest.buttonOnline or CreateFrame("Button", "pfQuestOnline", dockFrame,  BackdropTemplateMixin and "BackdropTemplate")
   pfQuest.buttonOnline:SetWidth(18)
   pfQuest.buttonOnline:SetHeight(15)
   pfQuest.buttonOnline:SetPoint("TOPRIGHT", dockFrame, "TOPRIGHT", -12, -10)

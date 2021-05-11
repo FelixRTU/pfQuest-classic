@@ -1,3 +1,5 @@
+pfQuestConfig.path = "Interface\\AddOns\\pfQuest-classic" 
+
 -- table.getn doesn't return sizes on tables that
 -- are using a named index on which setn is not updated
 local function tablesize(tbl)
@@ -125,7 +127,7 @@ local function DrawLine(path,x,y,nx,ny,hl,minimap)
   end
 end
 
-pfQuest.route = CreateFrame("Frame", "pfQuestRoute", WorldFrame)
+pfQuest.route = CreateFrame("Frame", "pfQuestRoute", WorldFrame,  BackdropTemplateMixin and "BackdropTemplate")
 pfQuest.route.firstnode = nil
 pfQuest.route.coords = {}
 
@@ -301,7 +303,7 @@ pfQuest.route:SetScript("OnUpdate", function(this)
   end
 end)
 
-pfQuest.route.drawlayer = CreateFrame("Frame", "pfQuestRouteDrawLayer", WorldMapFrame.ScrollContainer.Child)
+pfQuest.route.drawlayer = CreateFrame("Frame", "pfQuestRouteDrawLayer", WorldMapFrame.ScrollContainer.Child,  BackdropTemplateMixin and "BackdropTemplate")
 pfQuest.route.drawlayer:SetFrameLevel(2100)
 
 local mapStrata
@@ -316,10 +318,10 @@ end
 pfQuest.route.drawlayer:SetFrameStrata(mapStrata)
 pfQuest.route.drawlayer:SetAllPoints()
 
-WorldMapFrame.ScrollContainer.routes = CreateFrame("Frame", "pfQuestRouteDisplay", pfQuest.route.drawlayer)
+WorldMapFrame.ScrollContainer.routes = CreateFrame("Frame", "pfQuestRouteDisplay", pfQuest.route.drawlayer,  BackdropTemplateMixin and "BackdropTemplate")
 WorldMapFrame.ScrollContainer.routes:SetAllPoints()
 
-pfQuest.route.arrow = CreateFrame("Frame", "pfQuestRouteArrow", UIParent)
+pfQuest.route.arrow = CreateFrame("Frame", "pfQuestRouteArrow", UIParent,  BackdropTemplateMixin and "BackdropTemplate")
 pfQuest.route.arrow:SetPoint("CENTER", 0, -100)
 pfQuest.route.arrow:SetWidth(48)
 pfQuest.route.arrow:SetHeight(36)

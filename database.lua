@@ -157,7 +157,7 @@ for id, db in pairs(dbs) do
 end
 
 -- track questitems to maintain object requirements
-pfDatabase.itemlist = CreateFrame("Frame", "pfDatabaseQuestItemTracker", UIParent)
+pfDatabase.itemlist = CreateFrame("Frame", "pfDatabaseQuestItemTracker", UIParent ,  BackdropTemplateMixin and "BackdropTemplate")
 pfDatabase.itemlist.update = 0
 pfDatabase.itemlist.db = {}
 pfDatabase.itemlist.db_tmp = {}
@@ -1538,7 +1538,7 @@ local function LoadCustomData(always)
   end
 end
 
-local pfServerScan = CreateFrame("Frame", "pfServerItemScan", UIParent)
+local pfServerScan = CreateFrame("Frame", "pfServerItemScan", UIParent,  BackdropTemplateMixin and "BackdropTemplate")
 pfServerScan:SetWidth(200)
 pfServerScan:SetHeight(100)
 pfServerScan:SetPoint("TOP", 0, 0)

@@ -59,7 +59,7 @@ end
 local function CreateEntry(self, index)
   if self[index] then return end
 
-  self[index] = CreateFrame("Button", nil, self)
+  self[index] = CreateFrame("Button", nil, self,  BackdropTemplateMixin and "BackdropTemplate")
   self[index]:SetPoint("TOPLEFT", self, "TOPLEFT", 0, -(index-1)*19-10)
   self[index]:SetPoint("TOPRIGHT", self, "TOPRIGHT", 0, -(index-1)*19-10)
   self[index]:SetHeight(18)
@@ -79,7 +79,7 @@ local function CreateEntry(self, index)
   self[index].bg:SetAllPoints(self[index].text)
   self[index].bg:SetColorTexture(1,1,1,.02)
 
-  self[index].remove = CreateFrame("Button", nil, self[index])
+  self[index].remove = CreateFrame("Button", nil, self[index],  BackdropTemplateMixin and "BackdropTemplate")
   self[index].remove:SetPoint("RIGHT", -5, 0)
   self[index].remove:SetHeight(20)
   self[index].remove:SetWidth(20)
@@ -155,7 +155,7 @@ local function ReloadJournal(self)
 end
 
 -- browser window
-pfJournal = CreateFrame("Frame", "pfQuestJournal", UIParent)
+pfJournal = CreateFrame("Frame", "pfQuestJournal", UIParent,  BackdropTemplateMixin and "BackdropTemplate")
 pfJournal:Hide()
 pfJournal:SetWidth(340)
 pfJournal:SetHeight(520)
@@ -181,7 +181,7 @@ pfJournal.title:SetJustifyH("LEFT")
 pfJournal.title:SetFont(pfUI.font_default, 14)
 pfJournal.title:SetText("|cff33ffccpf|rQuest " .. pfQuest_Loc["Journal"])
 
-pfJournal.close = CreateFrame("Button", "pfQuestJournalClose", pfJournal)
+pfJournal.close = CreateFrame("Button", "pfQuestJournalClose", pfJournal,  BackdropTemplateMixin and "BackdropTemplate")
 pfJournal.close:SetPoint("TOPRIGHT", -5, -5)
 pfJournal.close:SetHeight(20)
 pfJournal.close:SetWidth(20)
@@ -194,7 +194,7 @@ pfJournal.close.texture:SetPoint("TOPLEFT", pfJournal.close, "TOPLEFT", 4, -4)
 pfJournal.close.texture:SetPoint("BOTTOMRIGHT", pfJournal.close, "BOTTOMRIGHT", -4, 4)
 pfUI.api.SkinButton(pfJournal.close, 1, .5, .5)
 
-pfJournal.entries = CreateFrame("Button", "pfQuestJournalEntries", pfJournal)
+pfJournal.entries = CreateFrame("Button", "pfQuestJournalEntries", pfJournal,  BackdropTemplateMixin and "BackdropTemplate")
 pfJournal.entries.ReloadJournal = ReloadJournal
 pfJournal.entries:EnableMouseWheel(true)
 pfJournal.entries:SetPoint("TOPLEFT", pfJournal, "TOPLEFT", 10, -35)

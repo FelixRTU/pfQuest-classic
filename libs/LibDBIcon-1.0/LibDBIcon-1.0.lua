@@ -217,7 +217,7 @@ local function updateCoord(self)
 end
 
 local function createButton(name, object, db)
-	local button = CreateFrame("Button", "LibDBIcon10_"..name, Minimap)
+	local button = CreateFrame("Button", "LibDBIcon10_"..name, Minimap,  BackdropTemplateMixin and "BackdropTemplate")
 	button.dataObject = object
 	button.db = db
 	button:SetFrameStrata("MEDIUM")

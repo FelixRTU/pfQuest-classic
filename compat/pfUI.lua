@@ -88,7 +88,16 @@ function pfUI.api.CreateBackdrop(f, inset, legacy, transp)
 
   -- use legacy backdrop handling
   if legacy then
-    f:SetBackdrop(pfUI.backdrop)
+    if not f.SetBackdrop then
+      Mixin(f, BackdropTemplateMixin)
+    end
+    f:SetBackdrop({
+      bgFile =  [=[Interface\ChatFrame\ChatFrameBackground]=],
+          edgeFile = "Interface\\Buttons\\WHITE8x8", edgeSize = 1, 
+      insets = {left = -1, right = -1, top = -1, bottom = -1} 
+    })
+    --f:SetBackdropColor(.06,.06,.06,1)
+    --f:SetBackdropBorderColor(.15,.15,.15,1)
     f:SetBackdropColor(br, bg, bb, ba)
     f:SetBackdropBorderColor(er, eg, eb , ea)
     return
@@ -106,7 +115,7 @@ function pfUI.api.CreateBackdrop(f, inset, legacy, transp)
     local border = tonumber(border) - 1
     local backdrop = pfUI.backdrop
     if border < 1 then backdrop = pfUI.backdrop_small end
-  	local b = CreateFrame("Frame", nil, f)
+  	local b = CreateFrame("Frame", nil, f,  BackdropTemplateMixin and "BackdropTemplate")
   	b:SetPoint("TOPLEFT", f, "TOPLEFT", -border, border)
   	b:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", border, -border)
 
@@ -157,10 +166,10 @@ function pfUI.api.SkinButton(button, cr, cg, cb)
 end
 
 function pfUI.api.CreateScrollFrame(name, parent)
-  local f = CreateFrame("ScrollFrame", name, parent)
+  local f = CreateFrame("ScrollFrame", name, parent,  BackdropTemplateMixin and "BackdropTemplate")
 
   -- create slider
-  f.slider = CreateFrame("Slider", nil, f)
+  f.slider = CreateFrame("Slider", nil, f,  BackdropTemplateMixin and "BackdropTemplate")
   f.slider:SetOrientation('VERTICAL')
   f.slider:SetPoint("TOPLEFT", f, "TOPRIGHT", -9, 0)
   f.slider:SetPoint("BOTTOMRIGHT", 0, 0)
@@ -219,7 +228,7 @@ function pfUI.api.CreateScrollFrame(name, parent)
 end
 
 function pfUI.api.CreateScrollChild(name, parent)
-  local f = CreateFrame("Frame", name, parent)
+  local f = CreateFrame("Frame", name, parent,  BackdropTemplateMixin and "BackdropTemplate")
 
   -- dummy values required
   f:SetWidth(1)

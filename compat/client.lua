@@ -1,7 +1,7 @@
 -- some abstraction to allow multi-client code
 local _, _, _, client = GetBuildInfo()
 
-local _G = _G or getfenv(0)
+--local _G = _G or getfenv(0)
 local gfind = string.gmatch or string.gfind
 
 pfQuestCompat = {}

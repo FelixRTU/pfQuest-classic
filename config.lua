@@ -217,7 +217,7 @@ StaticPopupDialogs["PFQUEST_RESET"] = {
   hideOnEscape = 1,
 }
 
-pfQuestConfig = CreateFrame("Frame", "pfQuestConfig", UIParent)
+pfQuestConfig = CreateFrame("Frame", "pfQuestConfig", UIParent,  BackdropTemplateMixin and "BackdropTemplate")
 pfQuestConfig:Hide()
 pfQuestConfig:SetWidth(280)
 pfQuestConfig:SetHeight(550)
@@ -254,20 +254,13 @@ end)
 
 pfQuestConfig.vpos = 40
 
-pfUI.api.CreateBackdrop(pfQuestConfig, nil, true, 0.75)
+(_G["pfUI"]).api.CreateBackdrop(pfQuestConfig, nil, true, 0.75)
 table.insert(UISpecialFrames, "pfQuestConfig")
 
--- detect current addon path
-local tocs = { "", "-master", "-tbc", "-wotlk", "-classic" }
-for _, name in pairs(tocs) do
-  local current = string.format("pfQuest%s", name)
-  local _, title = GetAddOnInfo(current)
-  if title then
-    pfQuestConfig.path = "Interface\\AddOns\\" .. current
-    pfQuestConfig.version = tostring(GetAddOnMetadata(current, "Version"))
-    break
-  end
-end
+
+pfQuestConfig.path = "Interface\\AddOns\\pfQuest-classic" 
+pfQuestConfig.version = tostring(GetAddOnMetadata("pfQuest-classic", "Version"))
+
 
 pfQuestConfig.title = pfQuestConfig:CreateFontString("Status", "LOW", "GameFontNormal")
 pfQuestConfig.title:SetFontObject(GameFontWhite)
@@ -276,7 +269,7 @@ pfQuestConfig.title:SetJustifyH("LEFT")
 pfQuestConfig.title:SetFont(pfUI.font_default, 14)
 pfQuestConfig.title:SetText("|cff33ffccpf|rQuest " .. pfQuest_Loc["Config"])
 
-pfQuestConfig.close = CreateFrame("Button", "pfQuestConfigClose", pfQuestConfig)
+pfQuestConfig.close = CreateFrame("Button", "pfQuestConfigClose", pfQuestConfig,  BackdropTemplateMixin and "BackdropTemplate")
 pfQuestConfig.close:SetPoint("TOPRIGHT", -5, -5)
 pfQuestConfig.close:SetHeight(20)
 pfQuestConfig.close:SetWidth(20)
@@ -292,7 +285,7 @@ pfQuestConfig.close:SetScript("OnClick", function(this)
  this:GetParent():Hide()
 end)
 
-pfQuestConfig.save = CreateFrame("Button", "pfQuestConfigReload", pfQuestConfig)
+pfQuestConfig.save = CreateFrame("Button", "pfQuestConfigReload", pfQuestConfig,  BackdropTemplateMixin and "BackdropTemplate")
 pfQuestConfig.save:SetWidth(160)
 pfQuestConfig.save:SetHeight(28)
 pfQuestConfig.save:SetPoint("BOTTOM", 0, 10)
@@ -347,7 +340,7 @@ function pfQuestConfig:CreateConfigEntries(config)
       local spacer = (data.pos[1]-1)*20
 
       -- basic frame
-      local frame = CreateFrame("Frame", "pfQuestConfig" .. count, pfQuestConfig)
+      local frame = CreateFrame("Frame", "pfQuestConfig" .. count, pfQuestConfig,  BackdropTemplateMixin and "BackdropTemplate")
       configframes[entry] = frame
 
       -- caption
@@ -366,7 +359,7 @@ function pfQuestConfig:CreateConfigEntries(config)
 
       -- checkbox
       elseif data.type == "checkbox" then
-        frame.input = CreateFrame("CheckButton", nil, frame, "ChatConfigCheckButtonTemplate")
+        frame.input = CreateFrame("CheckButton", nil, frame, "ChatConfigCheckButtonTemplate",  BackdropTemplateMixin and "BackdropTemplate" )
         frame.input:SetNormalTexture("")
         frame.input:SetPushedTexture("")
         frame.input:SetHighlightTexture("")
@@ -392,7 +385,7 @@ function pfQuestConfig:CreateConfigEntries(config)
         end)
       elseif data.type == "text" then
         -- input field
-        frame.input = CreateFrame("EditBox", nil, frame)
+        frame.input = CreateFrame("EditBox", nil, frame,  BackdropTemplateMixin and "BackdropTemplate")
         frame.input:SetTextColor(.2,1,.8,1)
         frame.input:SetJustifyH("RIGHT")
         frame.input:SetTextInsets(5,5,5,5)
@@ -414,7 +407,7 @@ function pfQuestConfig:CreateConfigEntries(config)
 
         pfUI.api.CreateBackdrop(frame.input, nil, true)
       elseif data.type == "button" and data.func then
-        frame.input = CreateFrame("Button", nil, frame)
+        frame.input = CreateFrame("Button", nil, frame,  BackdropTemplateMixin and "BackdropTemplate")
         frame.input:SetWidth(32)
         frame.input:SetHeight(16)
         frame.input:SetPoint("RIGHT", -20, 0)

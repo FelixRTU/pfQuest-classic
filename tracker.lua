@@ -56,7 +56,7 @@ end
 
 local unfolded = {}
 
-tracker = CreateFrame("Frame", "pfQuestMapTracker", UIParent)
+tracker = CreateFrame("Frame", "pfQuestMapTracker", UIParent,  BackdropTemplateMixin and "BackdropTemplate")
 tracker:Hide()
 tracker:SetPoint("LEFT", UIParent, "LEFT", 0, 0)
 tracker:SetWidth(200)
@@ -125,14 +125,14 @@ end)
 tracker.buttons = {}
 tracker.mode = "QUEST_TRACKING"
 
-tracker.backdrop = CreateFrame("Frame", nil, tracker)
+tracker.backdrop = CreateFrame("Frame", nil, tracker,  BackdropTemplateMixin and "BackdropTemplate")
 tracker.backdrop:SetAllPoints(tracker)
 tracker.backdrop.bg = tracker.backdrop:CreateTexture(nil, "BACKGROUND")
 tracker.backdrop.bg:SetColorTexture(0,0,0,.2)
 tracker.backdrop.bg:SetAllPoints()
 
 do -- button panel
-  tracker.panel = CreateFrame("Frame", nil, tracker.backdrop)
+  tracker.panel = CreateFrame("Frame", nil, tracker.backdrop,  BackdropTemplateMixin and "BackdropTemplate")
   tracker.panel:SetPoint("TOPLEFT", 0, 0)
   tracker.panel:SetPoint("TOPRIGHT", 0, 0)
   tracker.panel:SetHeight(panelheight)
@@ -145,7 +145,7 @@ do -- button panel
     pos = anchor == "TOPLEFT" and pos or pos*-1
     local func = func
 
-    local b = CreateFrame("Button", nil, tracker.panel)
+    local b = CreateFrame("Button", nil, tracker.panel,  BackdropTemplateMixin and "BackdropTemplate")
     b.tooltip = tooltip
     b.icon = b:CreateTexture(nil, "BACKGROUND")
     b.icon:SetAllPoints()
@@ -256,7 +256,7 @@ function tracker.ButtonClick(this, arg1)
     -- mark as done if node is quest and not in questlog
     if this.node.questid and not this.node.qlogid then
       -- mark as done in history
-      if string.find(this.node.questid,"^[0-9]*$") and not IsQuestFlaggedCompleted(this.node.questid) then 
+      if string.find(this.node.questid,"^[0-9]*$") and not C_QuestLog.IsQuestFlaggedCompleted(this.node.questid) then 
         -- shift clicking questgivers returns the quest name instead of the id 
         return 
       end
@@ -523,7 +523,7 @@ function tracker.ButtonAdd(title, node)
 
   -- create one if required
   if not tracker.buttons[id] then
-    tracker.buttons[id] = CreateFrame("Button", "pfQuestMapButton"..id, tracker)
+    tracker.buttons[id] = CreateFrame("Button", "pfQuestMapButton"..id, tracker,  BackdropTemplateMixin and "BackdropTemplate")
     tracker.buttons[id]:SetHeight(entryheight)
 
     tracker.buttons[id].bg = tracker.buttons[id]:CreateTexture(nil, "BACKGROUND")

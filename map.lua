@@ -162,7 +162,7 @@ for k, v in pairs({WorldMapFrame:GetChildren()}) do
   end
 end
 
-pfMap = CreateFrame("Frame", "pfQuestMap", WorldFrame)
+pfMap = CreateFrame("Frame", "pfQuestMap", WorldFrame,  BackdropTemplateMixin and "BackdropTemplate")
 pfMap.str2rgb = str2rgb
 pfMap.tooltips = {}
 pfMap.nodes = {}
@@ -175,7 +175,7 @@ pfMap.minimap_indoor = minimap_indoor
 pfMap.minimap_zoom = minimap_zoom
 pfMap.minimap_sizes = minimap_sizes
 
-pfMap.tooltip = CreateFrame("Frame" , "pfMapTooltip", GameTooltip)
+pfMap.tooltip = CreateFrame("Frame" , "pfMapTooltip", GameTooltip,  BackdropTemplateMixin and "BackdropTemplate")
 pfMap.tooltip:SetScript("OnShow", function(this)
   local focus = GetMouseFocus()
   -- abort on pfQuest nodes
@@ -411,7 +411,7 @@ function pfMap:AddNode(meta)
   if not meta["title"] then return end
 
   -- dont add completed quests
-  if meta["questid"] and IsQuestFlaggedCompleted(meta["questid"]) then 
+  if meta["questid"] and C_QuestLog.IsQuestFlaggedCompleted(meta["questid"]) then 
     if not meta["qmin"] or not meta["qlvl"] or math.abs(meta["qmin"] - meta["qlvl"]) < 30 then
       return 
     end
@@ -601,7 +601,7 @@ local function NodeLeave(this)
 end
 
 function pfMap:BuildNode(name, parent)
-  local f = CreateFrame("Button", name, parent)
+  local f = CreateFrame("Button", name, parent,  BackdropTemplateMixin and "BackdropTemplate")
   f:SetFrameLevel(2021) 
   f:SetFrameStrata(WorldMapFrame:GetFrameStrata())
 
